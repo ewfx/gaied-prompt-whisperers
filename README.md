@@ -23,7 +23,8 @@ This application will provide a solution to Commercial bank lending service team
 📹 [Video Demo](#) (if applicable)  
 🖼️ Screenshots:
 
-![Screenshot 1](link-to-image)
+![Screenshot 1](https://github.com/ewfx/gaied-prompt-whisperers/blob/main/DEMO/emails_gate_keeper_results.jpeg)
+![PPT](https://github.com/ewfx/gaied-prompt-whisperers/blob/main/DEMO/Prompt_Whisperers.pptx)
 
 ## 💡 Inspiration
 This problem statement inspired us to create a solution that leverages Generative AI and OCR technologies to:
