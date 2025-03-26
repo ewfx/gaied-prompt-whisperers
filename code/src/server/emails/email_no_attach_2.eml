@@ -1,0 +1,20 @@
+From: customer@example.com
+To: loans@bank.com
+Subject: Request to Update Name on Loan Account
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+Dear Loan Processing Team,
+
+I recently noticed that my name is incorrectly recorded in my loan account de=
+tails. Kindly update it as per the details below:
+
+- Loan Account Number: CB112233
+- Incorrect Name: Jonathan Smith
+- Correct Name: Jonathan R. Smith
+
+Please confirm if additional documentation is needed.
+
+Regards,
+Jonathan R. Smith

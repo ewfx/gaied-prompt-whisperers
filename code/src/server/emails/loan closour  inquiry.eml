@@ -1,0 +1,90 @@
+Delivered-To: muvvagopikrishna@gmail.com
+Received: by 2002:a05:7300:ed14:b0:15f:f193:adb0 with SMTP id oy20csp2049301dyb;
+        Mon, 24 Mar 2025 09:35:33 -0700 (PDT)
+X-Received: by 2002:a2e:b890:0:b0:30b:edfc:5d8a with SMTP id 38308e7fff4ca-30d7e0de184mr58031901fa.0.1742834133450;
+        Mon, 24 Mar 2025 09:35:33 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1742834133; cv=none;
+        d=google.com; s=arc-20240605;
+        b=AWRuSO+UUN97xjd58HSFt0kcO29fTda09m0y4Jb5L2BZLAsZT7pblVVw1HMOqbLUId
+         fBF0mrTOz6MX8KQ0/dgoJujXrbc7puIERonWe8ZARp+WKpVQ5G/ITYieJ782zJF0GOCA
+         /4ibQE2GhC3AJ9pyeonRiy312pGBDZXagl25Neu8CeIcMIDN9fGz11xFb4OfGiVNo4Rh
+         gNElTAsK4Ycvl8fz4zjUyAI0Hy2ytFRlc9VeaS8G3/q4zCxM93KvSmraHRTeOg2HI0dL
+         86H3JWCNTRY2weOLJ9qjrtyBrr0FvlkOew77PWqMJEWrIfFJAz/SGTGgpu1lezPEPwqA
+         kJQA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=to:subject:message-id:date:from:mime-version:dkim-signature;
+        bh=9+O5MJeK5I/MDh9qWNnQ9DxgZxqW9z0cb6DfHJ1dkSM=;
+        fh=A8ngyIaOWZ6G/GXNALL5xLbBGEGVss3Mn1UOKhhCc/U=;
+        b=BYRBnrP81lkfBy8gynNe784yilbCOucpb9SOTvUrC+I+eULxya9F08Ocjizmz9R8FS
+         TVPOPtBJxJ9pONwbnaJjyAgAnKwG37xxMBOMNnwZWF3ddzHGxyFFjbFnsoV5n4gGsXz6
+         YizeTfvbFh/1oR+UMBDuDH+uhsJMhnJEr6oeXuu/qS05BgoGbN9EN/fPYIOyGMpLcG19
+         UEamdt+NNTyC/an32ZS2jUCB9nVDtF+ajtO+lMR9XQkN+5F+/FmV0wSQQ4A34wc/39LS
+         ylLQwH3ocyFiaeJ+vQfzZE2M0enHRHz5C7r46xy7KEzzNgUD7Jo7XyM9LqzQwt9yiJMV
+         zQyg==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20230601 header.b=NPN0CUhv;
+       spf=pass (google.com: domain of gopikrishna9129@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=gopikrishna9129@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com;
+       dara=pass header.i=@gmail.com
+Return-Path: <gopikrishna9129@gmail.com>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id 38308e7fff4ca-30d7d8beb08sor13201841fa.11.2025.03.24.09.35.33
+        for <muvvagopikrishna@gmail.com>
+        (Google Transport Security);
+        Mon, 24 Mar 2025 09:35:33 -0700 (PDT)
+Received-SPF: pass (google.com: domain of gopikrishna9129@gmail.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20230601 header.b=NPN0CUhv;
+       spf=pass (google.com: domain of gopikrishna9129@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=gopikrishna9129@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com;
+       dara=pass header.i=@gmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1742834132; x=1743438932; dara=google.com;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=9+O5MJeK5I/MDh9qWNnQ9DxgZxqW9z0cb6DfHJ1dkSM=;
+        b=NPN0CUhvoisVBg6eBklZB02ZXnG9cbDbgt+kc7psyZIdaRMNC86nx/k++eaqVHQGnj
+         USGOxM9i1kBresPTayod5PY2shvrFt1TvjJX+qiB2Girkc4lRjLyurmOsDamD7LoI00O
+         gas6OzPvIxWyjRFNipZPo/ayujioXLhAwxYS2zHXlL7zD4kpVsyAcpv0c98vti9fbpvD
+         y5SFpjOzfa9LtJ0Co0cU2+T/QaSyAjpQyhtOIjlwSZiXGxncza+ZIn+lHTRtjatWMv20
+         pWCTHXd2/L/YF+4mHOYXSZGEPKadLsZEi1HZg5LlCvjOwGIKeuD+DYnfELHTgf8SGRDW
+         ZGGw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1742834132; x=1743438932;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=9+O5MJeK5I/MDh9qWNnQ9DxgZxqW9z0cb6DfHJ1dkSM=;
+        b=mXYShEKOBczgNJ9sdQkMQm22tu6Hc2hM7WvN2nAyt42U7Sh3qWUDB4LXjRFyeqpK6h
+         ASNNdk4ZoAd29V+t2O1A/XGQNuD9bKe045vAraNM2wXTMOtjaFw8EKPleEJSSXb/9qt1
+         TVZS19ezXBJd8Vca+AgopY0Hao7q46e425s7bQbJM3TCkkCC40oVHX22HPL+cUyklzpq
+         PLRm3I0nd7LWkhYUnpPFFzF0JPD5dssPm/RavWx/yqvXVe0Ql+hfO0Unn7iGCRfKhBBf
+         mrSVPQVKA52/cbtt5xIdDPHlpq3DcetdMOcMQlIyvk+W/rf7QowlVQc33twbIZmh/r5N
+         TdNg==
+X-Gm-Message-State: AOJu0YwLeUF8CXxzPLNBCxt8eDGmz2lTqat+3N4JBZVYqq7gk9pgeMtE
+	qYbmp/UWDiDF6rSZWqgD9fkyFhRskBrvBaIzwpB+FDkmg/aQfja43VKD+t8WUTKliF8cY32TFKU
+	j+22SiLU1wZbrDlybeZTE6pzzcC1+/e9gEiU=
+X-Gm-Gg: ASbGncsnfZkV2QuDw8s14Jr/JHREFP6gY8eKHGbggT4F6kPFduGxfivWOoD0Q4uXgEB
+	62PMDQl0HIJD4svkQKh8OazZWgrjyeKOrvn+YhV4xIkRS88dUPjwPLrfj4+JrvlW/7uw4R4Tm8d
+	mMaw6i+2FcW66evr//h+RsLgMcg61QX9iP1PY9u7QPVPbo/NK7330zDgUp6p9GDsaPjZQs
+X-Google-Smtp-Source: AGHT+IG/vi/GDQmalYlawdP4rB54I9BzyEePeSxEd4U0JDnW8IeT199+QSpr4CE7muxWyjvkwedC9J6LU2JAdsSLWWc=
+X-Received: by 2002:a2e:a99a:0:b0:30b:c9cb:47e5 with SMTP id
+ 38308e7fff4ca-30d7e214d17mr49711651fa.8.1742834132327; Mon, 24 Mar 2025
+ 09:35:32 -0700 (PDT)
+MIME-Version: 1.0
+From: Gopi Krishna <gopikrishna9129@gmail.com>
+Date: Mon, 24 Mar 2025 22:05:20 +0530
+X-Gm-Features: AQ5f1JryyyWm_nPcjoXjFLjEOsA08HhM6NsQbf8QPPS9Jbse_6ZETis-Iv6ZSfA
+Message-ID: <CADK9ijaazxuY83voE1vPboTQkJdmBSG7QTPv6ev+05Le4yPj5w@mail.gmail.com>
+Subject: loan closour  inquiry
+To: gopi krishna <muvvagopikrishna@gmail.com>
+Content-Type: multipart/alternative; boundary="0000000000005c260706311931a5"
+
+--0000000000005c260706311931a5
+Content-Type: text/plain; charset="UTF-8"
+
+Planning to close the account with account number : 23456789, please let me know the amount to be paid and any preclosour charges.
+
+best regards
+Gopikrishna
+

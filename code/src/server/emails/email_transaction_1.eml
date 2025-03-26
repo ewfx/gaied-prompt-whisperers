@@ -1,0 +1,21 @@
+From: customer@example.com
+To: loans@bank.com
+Subject: Confirmation of Loan Payment Received
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+Dear Loan Processing Team,
+
+I am writing to confirm the receipt of my recent loan payment. Kindly verify =
+and update my account accordingly.
+
+- Loan Account Number: CB112244
+- Payment Amount: $15,000
+- Payment Date: March 20, 2025
+- Payment Method: Wire Transfer
+
+Please confirm once the payment is processed successfully.
+
+Best regards,
+David Miller

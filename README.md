@@ -14,7 +14,9 @@
 ---
 
 ## 🎯 Introduction
-A brief overview of your project and its purpose. Mention which problem statement are your attempting to solve. Keep it concise and engaging.
+Gen AI-Based Email Classification and OCR.
+This application will provide a solution to Commercial bank lending service teams to check automatically identify the emails and provide necessary informtion to raise a Service Request
+
 
 ## 🎥 Demo
 🔗 [Live Demo](#) (if applicable)  
@@ -24,37 +26,60 @@ A brief overview of your project and its purpose. Mention which problem statemen
 ![Screenshot 1](link-to-image)
 
 ## 💡 Inspiration
-What inspired you to create this project? Describe the problem you're solving.
+This problem statement inspired us to create a solution that leverages Generative AI and OCR technologies to:
+
+Automate the classification of emails into predefined categories.
+Extract key elements such as customer details, loan amounts, and account numbers.
+Detect spam emails and provide reasons for their classification.
+Enhance the accuracy and speed of email processing, reducing manual effort and improving customer service efficiency.
 
 ## ⚙️ What It Does
-Explain the key features and functionalities of your project.
-
+Automating the classification of loan-related emails.
+Reducing manual effort in identifying customer intent and extracting key details.
+Enhancing the accuracy and speed of spam detection and email prioritization.
 ## 🛠️ How We Built It
-Briefly outline the technologies, frameworks, and tools used in development.
+This project was built using a combination of cutting-edge technologies and frameworks to deliver a robust and scalable solution. Here's how we approached the development:
+
+
 
 ## 🚧 Challenges We Faced
-Describe the major technical or non-technical challenges your team encountered.
+Reading and exracting the email attachments
 
 ## 🏃 How to Run
 1. Clone the repository  
    ```sh
-   git clone https://github.com/your-repo.git
+   git clone https://github.com/ewfx/gaied-prompt-whisperers
    ```
 2. Install dependencies  
    ```sh
-   npm install  # or pip install -r requirements.txt (for Python)
+   npm install  
    ```
 3. Run the project  
    ```sh
-   npm start  # or python app.py
+   npm start 
+   npm run server 
    ```
 
 ## 🏗️ Tech Stack
-- 🔹 Frontend: React / Vue / Angular
-- 🔹 Backend: Node.js / FastAPI / Django
-- 🔹 Database: PostgreSQL / Firebase
-- 🔹 Other: OpenAI API / Twilio / Stripe
+Backend:
+Node
+Express
+OpenAI API: Leveraged for Natural Language Processing (NLP) tasks such as:
+   Email classification into predefined categories.
+   Sentiment analysis to determine the tone of the email.
+   Intent detection to identify the purpose of the email.
+   Spam detection with detailed reasoning.
+
+File Parsing Libraries:
+   eml-parser and @kenjiuno/msgreader for parsing .eml and .msg email files.
+   pdf-parse, mammoth, and Tesseract.js for extracting text from attachments (PDFs, Word documents, and images).
+
+Frontend:
+React
+Material-UI
 
 ## 👥 Team
-- **Your Name** - [GitHub](#) | [LinkedIn](#)
-- **Teammate 2** - [GitHub](#) | [LinkedIn](#)
+- **Koteswar Rao Sirikonda** - [GitHub](#) | [LinkedIn](#)
+- **Mudimbi, Sreenivasan** - [GitHub](#) | [LinkedIn](#)
+- **Balaraj goud Kalai** - [GitHub](#) | [LinkedIn](#)
+- **Gopikrishna Muvva** - [GitHub](#) | [LinkedIn](#)

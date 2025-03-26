@@ -1,0 +1,20 @@
+From: customer@example.com
+To: loans@bank.com
+Subject: Request to Process Loan Prepayment
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+Hello Team,
+
+I would like to make a full prepayment towards my loan and request a final se=
+ttlement quote.
+
+- Loan Account Number: CB998811
+- Outstanding Balance: $30,500
+- Preferred Payment Mode: ACH Transfer
+
+Please provide the exact amount due and the closure process details.
+
+Best,
+Nancy Rogers
