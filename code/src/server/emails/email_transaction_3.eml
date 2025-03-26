@@ -1,0 +1,21 @@
+From: customer@example.com
+To: loans@bank.com
+Subject: Loan Disbursement Request =?utf-8?b?4oCT?= Urgent Processing Required
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+Dear Loan Disbursement Team,
+
+Please proceed with the disbursement of my approved loan as per the following=
+ details:
+
+- Loan Approval ID: CB778899
+- Disbursement Amount: $100,000
+- Preferred Disbursement Mode: Wire Transfer
+- Beneficiary Bank Account: 9876543210 (XYZ Bank)
+
+Let me know if any additional documentation is required for processing.
+
+Regards,
+Mark Anderson

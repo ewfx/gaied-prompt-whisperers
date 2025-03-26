@@ -16,7 +16,6 @@ app.use(express.json());
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const EMAIL_FOLDER = path.resolve(__dirname, './emails');
-console.log("openai key is", process.env.OPENAI_API_KEY);
 // Read email files
 function getEmailFiles() {
     return fs.readdirSync(EMAIL_FOLDER).filter(file => file.endsWith('.eml') || file.endsWith('.msg'));
@@ -55,7 +54,12 @@ function parseMsg(filePath) {
 // Extract text from attachments
 async function extractAttachmentText(attachment) {
     if (attachment.contentType.includes("pdf")) {
-        return pdfParse(Buffer.from(attachment.content, 'base64')).then(data => data.text);
+        try {
+            return pdfParse(Buffer.from(attachment.content, 'base64')).then(data => data.text);
+        } catch (error) {
+            console.error(`Error parsing PDF attachment: ${error.message}`);
+            return ""; // Return an empty string if parsing fails
+        }
     } else if (attachment.contentType.includes("msword")) {
         return mammoth.extractRawText({ buffer: Buffer.from(attachment.content, 'base64') }).then(result => result.value);
     } else if (attachment.contentType.startsWith("image/")) {
@@ -66,7 +70,7 @@ async function extractAttachmentText(attachment) {
 
 async function classifyRequest(emailContent) {
     const prompt = `
-Analyze the email and attachments. Classify it into loan-related categories. Possible request types:
+Analyze the email and attachments. Classify it into loan-related categories. Possible request types are like below and there can be more:
 - Loan Completion
 - Interest Rate Change
 - Address Change
@@ -75,7 +79,7 @@ Analyze the email and attachments. Classify it into loan-related categories. Pos
 - Inbound money movement
 - Outbound money movement  
 
-Provide a JSON response like: {"requestType": "Loan Completion", "subRequestTypes": ["Address Change"], "confidenceScore": 0.92}
+Provide a JSON response like below and add more if found: {"requestType": "Loan Completion", "subRequestTypes": ["Address Change"], "confidenceScore": 0.92}
 
 Email Content:
 "${emailContent}"
@@ -84,7 +88,7 @@ Email Content:
     const response = await openai.chat.completions.create({
         model: 'gpt-3.5-turbo', // Use the correct chat model
         messages: [
-            { role: 'system', content: 'You are a helpful assistant for classifying loan-related emails.' },
+            { role: 'system', content: 'You are a helpful assistant for classifying commercial loan-related emails.' },
             { role: 'user', content: prompt }
         ],
         max_tokens: 150,
@@ -96,7 +100,7 @@ Email Content:
 
 async function detectSpam(emailContent) {
     const prompt = `
-Determine if the following email is spam or not spam.
+Determine if the following email is spam or not spam in concise.
 
 Email Content:
 "${emailContent}"
@@ -105,7 +109,7 @@ Email Content:
     const response = await openai.chat.completions.create({
         model: 'gpt-3.5-turbo',
         messages: [
-            { role: 'system', content: 'You are a helpful assistant for spam detection.' },
+            { role: 'system', content: 'You are a helpful assistant for spam detectionn in commercial loan related emails.' },
             { role: 'user', content: prompt }
         ],
         max_tokens: 10,
@@ -116,12 +120,12 @@ Email Content:
 }
 async function extractEntities(emailContent) {
     const prompt = `
-Extract the following entities from the email content:
+Extract the entities from the email content like below and there can be many more:
 - Customer Name
 - Loan Amount
 - Account Number
 
-Provide the response in JSON format like:
+Provide the response in JSON format like below and add more if found:
 {
     "customerName": "John Doe",
     "loanAmount": "$50,000",
@@ -135,19 +139,18 @@ Email Content:
     const response = await openai.chat.completions.create({
         model: 'gpt-3.5-turbo',
         messages: [
-            { role: 'system', content: 'You are a helpful assistant for extracting entities from emails.' },
+            { role: 'system', content: 'You are a helpful assistant for extracting entities from commercial loan related emails' },
             { role: 'user', content: prompt }
         ],
         max_tokens: 150,
         temperature: 0.3
     });
-
     return JSON.parse(response.choices[0].message.content.trim());
 }
 
 async function classifyIntent(emailContent) {
     const prompt = `
-Identify the intent of the following email. Possible intents include:
+Identify the intent of the following email. Possible intents include like below and there can be more:
 - Loan Application
 - Query
 - Complaint
@@ -161,7 +164,7 @@ Email Content:
     const response = await openai.chat.completions.create({
         model: 'gpt-3.5-turbo',
         messages: [
-            { role: 'system', content: 'You are a helpful assistant for intent classification.' },
+            { role: 'system', content: 'You are a helpful assistant for intent classification in commercial loan releated emails.' },
             { role: 'user', content: prompt }
         ],
         max_tokens: 50,
@@ -196,41 +199,33 @@ Email Content:
 // Process emails and return classification
 app.get('/process-emails', async (req, res) => {
     try {
-        // const emailFiles = getEmailFiles();
-        // const results = [];
+        const emailFiles = getEmailFiles();
+        const results = [];
 
-        // for (let file of emailFiles) {
-        //     const filePath = path.join(EMAIL_FOLDER, file);
-        //     let email = file.endsWith('.eml') ? await parseEml(filePath) : parseMsg(filePath);
+        for (let file of emailFiles) {
+            const filePath = path.join(EMAIL_FOLDER, file);
+            let email = file.endsWith('.eml') ? await parseEml(filePath) : parseMsg(filePath);
 
-        //     let emailText = email.body;
-        //     for (let attachment of email.attachments) {
-        //         emailText += "\n" + (await extractAttachmentText(attachment));
-        //     }
-
-        //     const classification = await classifyRequest(emailText);
-        //     const sentiment = await analyzeSentiment(emailText);
-        //     const intent = await classifyIntent(emailText);
-        //     const entities = await extractEntities(emailText);
-        //     const spamStatus = await detectSpam(emailText);
-        //     results.push({ subject: email.subject, ...classification, sentiment, intent, entities, spamStatus });
-        // }
-        const results = [
-            {
-                "subject": "loan application inquiry",
-                "requestType": "Loan Completion",
-                "confidenceScore": 0.85,
-                "sentiment": "The sentiment of the email content is Neutral.",
-                "intent": "Intent: Loan Application",
-                "entities": {
-                    "customerName": "Gopikrishna",
-                    "loanAmount": "$20,000",
-                    "accountNumber": ""
-                },
-                "spamStatus": "Based on the content provided, the email does not"
+            let emailText = email.body;
+            for (let attachment of email.attachments) {
+                emailText += "\n" + (await extractAttachmentText(attachment));
             }
-        ]
 
+            const classification = await classifyRequest(emailText);
+            const sentiment = await analyzeSentiment(emailText);
+            const intent = await classifyIntent(emailText);
+            const entities = await extractEntities(emailText);
+            const spamStatus = await detectSpam(emailText);
+            results.push({
+                subject: email.subject,
+                ...classification,
+                sentiment,
+                intent,
+                entities,
+                spamStatus,
+            });
+
+        }
         res.json(results);
     } catch (error) {
         console.error(error);
